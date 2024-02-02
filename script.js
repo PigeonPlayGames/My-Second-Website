@@ -8,12 +8,12 @@ let board = [
     [0, 0, 0, 0],
     [0, 0, 0, 0]
 ];
-
-function setupGame() {
-    addNewNumber();
-    addNewNumber();
-    updateDisplay();
-    setupDragHandlers();
+document.addEventListener('DOMContentLoaded', () => {
+    function setupGame() {
+        addNewNumber();
+        addNewNumber();
+        updateDisplay();
+        setupDragHandlers();
 }
 
 function addNewNumber() {
