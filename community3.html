@@ -8,13 +8,55 @@
 </head>
 <body>
     <nav class="container-fluid">
-        <!-- Same navigation as in index.html -->
+        <ul>
+            <li><strong>PigeonPlayGames</strong></li>
+        </ul>
+        <ul>
+            <li><a href="index.html" role="button">Home</a></li>
+            <li><a href="games2.html" role="button">Games</a></li>
+            <li><a href="community3.html" role="button">Community</a></li>
+        </ul>
     </nav>
+    
     <main class="container">
-        <h2>Join Our Community</h2>
-        <p>Connect, share, and enjoy gaming together.</p>
-        <!-- Add more content as needed -->
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>The Community Hub</h2>
+                    <h3> " please be patient for our new log-in page in April 2024.</h3>
+                </hgroup>
+                <p>Explore our diverse collection of games and join our vibrant community of gamers. From strategy and adventure to action and puzzles, we have something for everyone.</p>
+                <figure>
+                    <img src="https://source.unsplash.com/random/400x300/?gaming" alt="Gaming Collection" />
+                    <figcaption><a href="#" target="_blank">Discover More</a></figcaption>
+                </figure>
+                <h3>Latest Releases</h3>
+                <p>Check out our newest games and updates. Stay ahead of the game with PigeonPlayGames.</p>
+                <h3>Join Our Community</h3>
+                <p>Connect with fellow gamers, share tips, and participate in exciting events. Be part of our gaming family.</p>
+            </section>
+        </div>
     </main>
-    <!-- Footer -->
+    <section aria-label="Subscribe example">
+        <div class="container">
+            <article>
+                <hgroup>
+                    <h2>Stay Updated</h2>
+                    <h3>Subscribe to our newsletter</h3>
+                </hgroup>
+                <form class="grid">
+                    <input type="text" id="firstname" name="firstname" placeholder="First Name" aria-label="First Name" required />
+                    <input type="email" id="email" name="email" placeholder="Email" aria-label="Email" required />
+                    <button type="submit" onclick="event.preventDefault()">Subscribe</button>
+                </form>
+            </article>
+        </div>
+    </section>
+    <footer class="container">
+        <small>
+            <a href="#">Privacy Policy</a> • <a href="#">Terms of Use</a>
+        </small>
+    </footer>
 </body>
 </html>
+
