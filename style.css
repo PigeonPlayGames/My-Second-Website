@@ -35,6 +35,23 @@ body, html {
   border-radius: 5px;
 }
 
+#navigation {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#navigation a {
+    color: #776e65; /* Adjust the color to fit your design */
+    text-decoration: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#navigation a:hover {
+    text-decoration: underline;
+}
+
+
 /* Additional styles for different number values */
 .number-2 { background-color: #eee4da; }
 .number-4 { background-color: #ede0c8; }
