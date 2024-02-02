@@ -35,6 +35,23 @@ body, html {
   animation: moveObstacle 2s infinite linear;
 }
 
+/* Existing styles remain unchanged */
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #000;
+  font-size: 24px;
+}
+
+/* Improve jumping and falling animations */
+@keyframes jump {
+  0% { bottom: 0; }
+  50% { bottom: 150px; } /* Peak of the jump */
+  100% { bottom: 0; }
+}
+
 @keyframes moveObstacle {
   from { right: -20px; }
   to { right: 100%; }
