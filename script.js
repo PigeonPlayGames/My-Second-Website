@@ -206,17 +206,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', jumpDino);
 });
 
+function setupDinoJumpHandlers() {
+    const dinoRunContainer = document.getElementById('dinoRunContainer');
+    dinoRunContainer.addEventListener('click', jumpDino);
+    dinoRunContainer.addEventListener('touchstart', (event) => {
+        event.preventDefault(); // Prevent scrolling when touching
+        jumpDino();
+    }, { passive: false });
+}
+
 let isJumping = false;
 
-function jumpDino(event) {
-    if (event.keyCode === 32 && !isJumping) { // Space bar code
+function jumpDino() {
+    if (!isJumping) {
         isJumping = true;
         let dino = document.getElementById('dino');
         let jumpHeight = 0;
         let upInterval = setInterval(() => {
-            if (jumpHeight >= 150) { // Max jump height
+            if (jumpHeight >= 150) { // Adjust max jump height if needed
                 clearInterval(upInterval);
-                // Dino comes down
                 let downInterval = setInterval(() => {
                     if (jumpHeight <= 0) {
                         clearInterval(downInterval);
@@ -227,7 +235,6 @@ function jumpDino(event) {
                     }
                 }, 20);
             } else {
-                // Dino goes up
                 jumpHeight += 10;
                 dino.style.bottom = jumpHeight + 'px';
             }
