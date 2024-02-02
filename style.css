@@ -1,126 +1,41 @@
-/* Basic reset for body margins and padding */
 body, html {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
   background-color: #faf8ef;
 }
 
-/* Container for the game board */
-#gameContainer {
-  width: 500px;
-  height: 500px;
-  background-color: #bbada0;
-  padding: 10px;
-  border-radius: 10px;
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center games horizontally */
-  justify-content: start; /* Align games to the start of the flex container */
-  width: 100%; /* Adjust the width as necessary */
-  max-width: 600px; /* Adjust the max-width as necessary, or remove it */
-  margin: auto; /* Center the container on the page */
-}
-
-#gameContainer, #dinoRunContainer {
-    width: 100%; /* Ensure full width within the flex container */
-    margin-bottom: 20px; /* Add some space between the games */
-}
-
-/* Styling for individual cells */
-.cell {
-  background-color: #cdc1b4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #776e65;
-  font-size: 35px;
-  font-weight: bold;
-  border-radius: 5px;
-}
-
-#navigation {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#navigation a {
-    color: #776e65; /* Adjust the color to fit your design */
-    text-decoration: none;
-    padding: 10px;
-    font-weight: bold;
-}
-
-#navigation a:hover {
-    text-decoration: underline;
-}
-
-
-/* Additional styles for different number values */
-.number-2 { background-color: #eee4da; }
-.number-4 { background-color: #ede0c8; }
-.number-8 { background-color: #f2b179; color: #f9f6f2; }
-.number-16 { background-color: #f59563; color: #f9f6f2; }
-.number-32 { background-color: #f67c5f; color: #f9f6f2; }
-.number-64 { background-color: #f65e3b; color: #f9f6f2; }
-.number-128 { background-color: #edcf72; color: #f9f6f2; }
-.number-256 { background-color: #edcc61; color: #f9f6f2; }
-.number-512 { background-color: #edc850; color: #f9f6f2; }
-.number-1024 { background-color: #edc53f; color: #f9f6f2; }
-.number-2048 { background-color: #edc22e; color: #f9f6f2; }
-
-/* Additional styling for larger numbers might be necessary */
-.number-4096, .number-8192, .number-16384 { background-color: #3c3a32; color: #f9f6f2; }
-
-/* Dino Run Game Styles */
 #dinoRunContainer {
-    width: 100%;
-    max-width: 600px; /* Adjust based on your preference */
-    height: 200px;
-    position: relative;
-    background-color: #f4f4f4; /* Light gray background */
-    overflow: hidden;
+  width: 600px;
+  height: 200px;
+  background-color: #f4f4f4;
+  overflow: hidden;
+  position: relative;
 }
 
 #dino {
-    width: 40px;
-    height: 40px;
-    background-color: #000; /* Black dino */
-    position: absolute;
-    bottom: 0;
-    left: 50px;
+  width: 40px;
+  height: 40px;
+  background-color: #000;
+  position: absolute;
+  bottom: 0;
+  left: 50px;
 }
 
 #obstacle {
-    width: 20px;
-    height: 20px;
-    background-color: #888; /* Dark gray obstacle */
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    animation: moveObstacle 2s infinite linear; /* Adjust timing for difficulty */
+  width: 20px;
+  height: 20px;
+  background-color: #888;
+  position: absolute;
+  bottom: 0;
+  right: 100%;
+  animation: moveObstacle 2s infinite linear;
 }
 
 @keyframes moveObstacle {
-    from { right: -20px; }
-    to { right: 100%; }
-}
-
-
-/* Simple animation for cell appearance */
-@keyframes appear {
-  from { transform: scale(0.5); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.cell:not(:empty) {
-  animation: appear 0.1s ease-in-out;
+  from { right: -20px; }
+  to { right: 100%; }
 }
