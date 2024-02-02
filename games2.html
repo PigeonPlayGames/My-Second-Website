@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
@@ -13,6 +14,28 @@
     />
 
     <style>
+
+      <style>
+        .status {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+      
       body {
         background: #222;
         font-family: "Press Start 2P", monospace;
@@ -205,6 +228,15 @@
       }
     </style>
 
+    <div class="status" id="status">Use buttons or keyboard to control the game.</div>
+    <div class="controls">
+        <button id="coin">Coin</button>
+        <button id="left">Left</button>
+        <button id="right">Right</button>
+        <button id="accelerate">Accelerate</button>
+        <button id="brake">Brake</button>
+    </div>
+
     <script>
       window.console = window.console || function (t) {};
     </script>
@@ -302,7 +334,42 @@
       // ------------------------------------------------------------
       // helper functions
       // ------------------------------------------------------------
+      document.addEventListener('keydown', function(event) {
+            handleAction(event.key);
+        });
 
+        document.getElementById('coin').addEventListener('click', function() { handleAction("c"); });
+        document.getElementById('left').addEventListener('click', function() { handleAction("ArrowLeft"); });
+        document.getElementById('right').addEventListener('click', function() { handleAction("ArrowRight"); });
+        document.getElementById('accelerate').addEventListener('click', function() { handleAction("ArrowUp"); });
+        document.getElementById('brake').addEventListener('click', function() { handleAction("ArrowDown"); });
+
+        function handleAction(key) {
+            const status = document.getElementById('status');
+
+            switch (key) {
+                case "c":
+                case "C":
+                    status.textContent = "Game started! Coin inserted.";
+                    break;
+                case "ArrowLeft":
+                    status.textContent = "Turning left...";
+                    break;
+                case "ArrowRight":
+                    status.textContent = "Turning right...";
+                    break;
+                case "ArrowUp":
+                    status.textContent = "Accelerating...";
+                    break;
+                case "ArrowDown":
+                    status.textContent = "Braking...";
+                    break;
+                default:
+                    // Handle other keys or ignore them
+                    break;
+            }
+        }
+      
       Number.prototype.pad = function (numZeros, char = 0) {
         let n = Math.abs(this);
         let zeros = Math.max(0, numZeros - Math.floor(n).toString().length);
