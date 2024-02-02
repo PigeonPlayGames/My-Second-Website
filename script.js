@@ -1,32 +1,39 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize your game board here
   setupGame();
-
-  document.addEventListener('keydown', handleInput);
 });
 
+let board = [
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0]
+];
+
 function setupGame() {
-  // Set up the initial state of the game
+  // Place the first two numbers
+  addNewNumber();
+  addNewNumber();
+  updateDisplay();
 }
 
-function handleInput(event) {
-  // Handle user input (arrow keys) to move tiles
-  switch(event.keyCode) {
-    case 37: // Left arrow
-      // Move tiles left
-      break;
-    case 38: // Up arrow
-      // Move tiles up
-      break;
-    case 39: // Right arrow
-      // Move tiles right
-      break;
-    case 40: // Down arrow
-      // Move tiles down
-      break;
+function addNewNumber() {
+  let added = false;
+  while (!added) {
+    let row = Math.floor(Math.random() * 4);
+    let col = Math.floor(Math.random() * 4);
+    if (board[row][col] === 0) {
+      board[row][col] = Math.random() > 0.5 ? 2 : 4;
+      added = true;
+    }
   }
+}
 
-  // Add new tile on the board in a random position after each move
-  // Update the board display based on the game state
+function updateDisplay() {
+  for (let row = 0; row < 4; row++) {
+    for (let col = 0; col < 4; col++) {
+      let cell = document.querySelector(`#cell-${row}-${col}`);
+      cell.textContent = board[row][col] === 0 ? "" : board[row][col];
+    }
+  }
 }
