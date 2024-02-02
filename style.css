@@ -17,12 +17,17 @@ body, html {
 }
 
 #dino {
-  width: 40px;
-  height: 40px;
-  background-color: #000;
-  position: absolute;
-  bottom: 0;
-  left: 50px;
+    width: 40px;
+    height: 40px;
+    background-color: #000;
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    transition: bottom 0.3s;
+}
+
+.is-jumping {
+    animation: jump 0.3s ease-out;
 }
 
 #obstacle {
@@ -45,11 +50,9 @@ body, html {
   font-size: 24px;
 }
 
-/* Improve jumping and falling animations */
 @keyframes jump {
-  0% { bottom: 0; }
-  50% { bottom: 150px; } /* Peak of the jump */
-  100% { bottom: 0; }
+    0%, 100% { bottom: 0; }
+    50% { bottom: 100px; }
 }
 
 @keyframes moveObstacle {
