@@ -1,60 +1,87 @@
 document.addEventListener('DOMContentLoaded', () => {
-    setupDinoJumpHandlers();
-    startObstacleMovement();
+    setupGame();
 });
 
 let isJumping = false;
+let gameSpeed = 2000; // Initial speed of the obstacle
 let score = 0;
-let obstacleSpeed = 2000; // Milliseconds it takes for an obstacle to cross the screen
+let gameInterval;
+let gameRunning = false;
 
-function setupDinoJumpHandlers() {
+function setupGame() {
     const dinoRunContainer = document.getElementById('dinoRunContainer');
-    dinoRunContainer.addEventListener('click', () => jumpDino());
+    dinoRunContainer.addEventListener('click', jumpDino);
+    startGame();
 }
 
 function jumpDino() {
-    if (isJumping) return;
+    if (isJumping || !gameRunning) return;
+    
     isJumping = true;
     const dino = document.getElementById('dino');
-    let position = 0;
-    const upInterval = setInterval(() => {
-        if (position >= 150) {
-            clearInterval(upInterval);
-            const downInterval = setInterval(() => {
-                if (position <= 0) {
-                    clearInterval(downInterval);
-                    isJumping = false;
-                } else {
-                    position -= 10;
-                    dino.style.bottom = position + 'px';
-                }
-            }, 20);
-        } else {
-            position += 10;
-            dino.style.bottom = position + 'px';
-        }
-    }, 20);
+    dino.classList.add('is-jumping');
+
+    setTimeout(() => {
+        dino.classList.remove('is-jumping');
+        isJumping = false;
+    }, 600); // Duration of the jump animation
 }
 
-function startObstacleMovement() {
+function startGame() {
+    gameRunning = true;
+    resetScore();
     const obstacle = document.getElementById('obstacle');
-    obstacle.style.animation = `moveObstacle ${obstacleSpeed / 1000}s infinite linear`;
+    obstacle.style.animation = `moveObstacle ${gameSpeed / 1000}s infinite linear`;
 
-    obstacle.addEventListener('animationiteration', () => {
-        score++;
+    gameInterval = setInterval(checkCollision, 10);
+}
+
+function checkCollision() {
+    const dino = document.getElementById('dino');
+    const obstacle = document.getElementById('obstacle');
+
+    const dinoRect = dino.getBoundingClientRect();
+    const obstacleRect = obstacle.getBoundingClientRect();
+
+    // Simplified collision detection
+    if (obstacleRect.left < dinoRect.right && obstacleRect.right > dinoRect.left &&
+        obstacleRect.bottom > dinoRect.top) {
+        gameOver();
+    } else {
         updateScore();
-        // Increase speed to make the game harder
-        obstacleSpeed *= 0.98; // 2% speed increase per iteration
-        obstacle.style.animationDuration = `${obstacleSpeed / 1000}s`;
-    });
+    }
 }
 
 function updateScore() {
-    // Assuming you have an element to display the score
+    score += 1;
     const scoreDisplay = document.getElementById('score');
-    if(scoreDisplay) {
+    if (scoreDisplay) {
         scoreDisplay.textContent = `Score: ${score}`;
     }
 }
 
-// Add collision detection similar to previous implementation here
+function gameOver() {
+    clearInterval(gameInterval);
+    gameRunning = false;
+    const obstacle = document.getElementById('obstacle');
+    obstacle.style.animationPlayState = 'paused';
+    alert(`Game Over! Score: ${score}`);
+    // Prompt for restart
+    if (confirm('Restart game?')) {
+        startGame();
+    }
+}
+
+function resetScore() {
+    score = 0;
+    updateScore();
+}
+
+function startObstacleMovement() {
+    const obstacle = document.getElementById('obstacle');
+    obstacle.addEventListener('animationiteration', () => {
+        // Increase difficulty by speeding up the obstacle
+        gameSpeed *= 0.98;
+        obstacle.style.animationDuration = `${gameSpeed / 1000}s`;
+    });
+}
