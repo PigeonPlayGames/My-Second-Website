@@ -1,120 +1,203 @@
 document.addEventListener('DOMContentLoaded', () => {
-  setupGame();
+    setupGame();
 });
 
 let board = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0]
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
 ];
 
 function setupGame() {
-  addNewNumber();
-  addNewNumber();
-  updateDisplay();
-  setupDragHandlers();
+    addNewNumber();
+    addNewNumber();
+    updateDisplay();
+    setupDragHandlers();
 }
 
 function addNewNumber() {
-  let available = [];
-  for (let row = 0; row < 4; row++) {
-    for (let col = 0; col < 4; col++) {
-      if (board[row][col] === 0) available.push({ row, col });
+    let available = [];
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+            if (board[row][col] === 0) available.push({ row, col });
+        }
     }
-  }
-  if (available.length) {
-    let spot = available[Math.floor(Math.random() * available.length)];
-    board[spot.row][spot.col] = Math.random() < 0.9 ? 2 : 4;
-  }
+    if (available.length) {
+        let spot = available[Math.floor(Math.random() * available.length)];
+        board[spot.row][spot.col] = Math.random() < 0.9 ? 2 : 4;
+    }
 }
 
 function updateDisplay() {
-  const container = document.getElementById('gameContainer');
-  container.innerHTML = ''; // Clear existing tiles
-  for (let row = 0; row < 4; row++) {
-    for (let col = 0; col < 4; col++) {
-      let cell = document.createElement('div');
-      cell.className = 'cell';
-      cell.textContent = board[row][col] > 0 ? board[row][col] : '';
-      cell.id = `cell-${row}-${col}`;
-      container.appendChild(cell);
+    const container = document.getElementById('gameContainer');
+    container.innerHTML = ''; // Clear existing tiles
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+            let cell = document.createElement('div');
+            cell.className = 'cell number-' + board[row][col];
+            cell.textContent = board[row][col] > 0 ? board[row][col] : '';
+            cell.id = `cell-${row}-${col}`;
+            container.appendChild(cell);
+        }
     }
-  }
 }
 
-// Dragging logic
-let startX, startY;
-
 function setupDragHandlers() {
-  const gameContainer = document.getElementById('gameContainer');
-  gameContainer.addEventListener('mousedown', startDrag);
-  gameContainer.addEventListener('touchstart', startDragTouch, { passive: true });
+    const gameContainer = document.getElementById('gameContainer');
+    gameContainer.addEventListener('mousedown', startDrag);
+    gameContainer.addEventListener('touchstart', startDragTouch, { passive: true });
 }
 
 function startDrag(event) {
-  event.preventDefault(); // Prevent text selection
-  startX = event.pageX;
-  startY = event.pageY;
-  document.addEventListener('mousemove', onDrag);
-  document.addEventListener('mouseup', endDrag);
-}
-
-function onDrag(event) {
-  // Optional: Implement logic here if you want to give real-time feedback as the user drags
+    event.preventDefault(); // Prevent text selection
+    startX = event.pageX;
+    startY = event.pageY;
+    document.addEventListener('mouseup', endDrag);
 }
 
 function startDragTouch(event) {
-  if (event.touches.length === 1) {
-    startX = event.touches[0].pageX;
-    startY = event.touches[0].pageY;
-    document.addEventListener('touchmove', onDragTouch, { passive: true });
-    document.addEventListener('touchend', endDragTouch);
-  }
+    if (event.touches.length === 1) {
+        startX = event.touches[0].pageX;
+        startY = event.touches[0].pageY;
+        document.addEventListener('touchend', endDragTouch);
+    }
 }
 
-function onDragTouch(event) {
-  // Similar to onDrag, for touch devices
-}
-
-function endDrag() {
-  document.removeEventListener('mousemove', onDrag);
-  document.removeEventListener('mouseup', endDrag);
-  // Logic to determine direction and move tiles
+function endDrag(event) {
+    const endX = event.pageX;
+    const endY = event.pageY;
+    handleDrag(endX, endY);
+    document.removeEventListener('mouseup', endDrag);
 }
 
 function endDragTouch(event) {
-  document.removeEventListener('touchmove', onDragTouch);
-  document.removeEventListener('touchend', endDragTouch);
-  // Similar logic to determine direction and move tiles, using last touch position
-}
-
-  document.removeEventListener('touchend', endDragTouch);
+    const endX = event.changedTouches[0].pageX;
+    const endY = event.changedTouches[0].pageY;
+    handleDrag(endX, endY);
+    document.removeEventListener('touchend', endDragTouch);
 }
 
 function handleDrag(endX, endY) {
-  const deltaX = endX - startX;
-  const deltaY = endY - startY;
-  const absDeltaX = Math.abs(deltaX);
-  const absDeltaY = Math.abs(deltaY);
+    const deltaX = endX - startX;
+    const deltaY = endY - startY;
 
-  if (absDeltaX > absDeltaY) {
-    if (deltaX > 0) {
-      moveRight();
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 0) {
+            moveRight();
+        } else {
+            moveLeft();
+        }
     } else {
-      moveLeft();
+        if (deltaY > 0) {
+            moveDown();
+        } else {
+            moveUp();
+        }
     }
-  } else {
-    if (deltaY > 0) {
-      moveDown();
-    } else {
-      moveUp();
-    }
-  }
-  addNewNumber();
-  updateDisplay();
+    addNewNumber();
+    updateDisplay();
 }
 
-// Movement functions (moveLeft, moveRight, moveUp, moveDown) should be implemented here
-// These functions will contain the logic to move and merge tiles on the board
+// Movement functions: moveLeft, moveRight, moveUp, moveDown
+// You need to implement the logic for these functions based on the 2048 game rules
+// For simplicity, the detailed implementations are omitted here
+// Each function should update the 'board' array according to the game's rules and then call updateDisplay()
 
+// Moves all tiles left
+function moveLeft() {
+    let moved = false;
+    board.forEach((row, rowIndex) => {
+        // Compact the row: remove zeros and slide values to the left
+        let newRow = row.filter(val => val);
+        for (let i = 0; i < newRow.length - 1; i++) {
+            // Merge adjacent tiles of the same value
+            if (newRow[i] === newRow[i + 1]) {
+                newRow[i] *= 2;
+                newRow[i + 1] = 0;
+                moved = true;
+            }
+        }
+        newRow = newRow.filter(val => val);
+        while (newRow.length < 4) {
+            newRow.push(0);
+        }
+        if (board[rowIndex].join('') !== newRow.join('')) moved = true;
+        board[rowIndex] = newRow;
+    });
+    if (moved) addNewNumber();
+}
+
+// Moves all tiles right
+function moveRight() {
+    let moved = false;
+    board.forEach((row, rowIndex) => {
+        let newRow = row.filter(val => val).reverse();
+        for (let i = 0; i < newRow.length - 1; i++) {
+            if (newRow[i] === newRow[i + 1]) {
+                newRow[i] *= 2;
+                newRow[i + 1] = 0;
+                moved = true;
+            }
+        }
+        newRow = newRow.filter(val => val);
+        while (newRow.length < 4) {
+            newRow.unshift(0);
+        }
+        newRow = newRow.reverse();
+        if (board[rowIndex].join('') !== newRow.join('')) moved = true;
+        board[rowIndex] = newRow;
+    });
+    if (moved) addNewNumber();
+}
+
+// Moves all tiles up
+function moveUp() {
+    let moved = false;
+    for (let col = 0; col < 4; col++) {
+        let column = board.map(row => row[col]);
+        let newCol = column.filter(val => val);
+        for (let i = 0; i < newCol.length - 1; i++) {
+            if (newCol[i] === newCol[i + 1]) {
+                newCol[i] *= 2;
+                newCol[i + 1] = 0;
+                moved = true;
+            }
+        }
+        newCol = newCol.filter(val => val);
+        while (newCol.length < 4) {
+            newCol.push(0);
+        }
+        if (column.join('') !== newCol.join('')) moved = true;
+        for (let row = 0; row < 4; row++) {
+            board[row][col] = newCol[row];
+        }
+    }
+    if (moved) addNewNumber();
+}
+
+// Moves all tiles down
+function moveDown() {
+    let moved = false;
+    for (let col = 0; col < 4; col++) {
+        let column = board.map(row => row[col]);
+        let newCol = column.filter(val => val).reverse();
+        for (let i = 0; i < newCol.length - 1; i++) {
+            if (newCol[i] === newCol[i + 1]) {
+                newCol[i] *= 2;
+                newCol[i + 1] = 0;
+                moved = true;
+            }
+        }
+        newCol = newCol.filter(val => val);
+        while (newCol.length < 4) {
+            newCol.unshift(0);
+        }
+        newCol = newCol.reverse();
+        if (column.join('') !== newCol.join('')) moved = true;
+        for (let row = 0; row < 4; row++) {
+            board[row][col] = newCol[row];
+        }
+    }
+    if (moved) addNewNumber();
+}
