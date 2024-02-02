@@ -125,3 +125,88 @@ window.HUB_EVENTS = {
 }, window.CP.exitedLoop = function (E) {
   window.CP.PenTimer.exitedLoop(E)
 };
+
+// Assuming the existing code is already in place...
+
+// Extend the window object with game control functions
+window.gameControls = {
+  insertCoin: function() {
+    console.log("Game started! Coin inserted.");
+    // Additional logic to start the game
+  },
+  turnLeft: function() {
+    console.log("Turning left...");
+    // Additional logic for turning left
+  },
+  turnRight: function() {
+    console.log("Turning right...");
+    // Additional logic for turning right
+  },
+  accelerate: function() {
+    console.log("Accelerating...");
+    // Additional logic for accelerating
+  },
+  brake: function() {
+    console.log("Braking...");
+    // Additional logic for braking
+  },
+};
+
+// Function to handle actions based on key press or button click
+function handleAction(action) {
+  switch (action) {
+    case "coin":
+      window.gameControls.insertCoin();
+      break;
+    case "ArrowLeft":
+    case "left":
+      window.gameControls.turnLeft();
+      break;
+    case "ArrowRight":
+    case "right":
+      window.gameControls.turnRight();
+      break;
+    case "ArrowUp":
+    case "accelerate":
+      window.gameControls.accelerate();
+      break;
+    case "ArrowDown":
+    case "brake":
+      window.gameControls.brake();
+      break;
+    default:
+      console.log("Action not recognized.");
+      break;
+  }
+}
+
+// Event listeners for keyboard controls
+document.addEventListener('keydown', function(event) {
+    let action = "";
+    switch (event.key) {
+        case "c":
+        case "C":
+            action = "coin";
+            break;
+        case "ArrowLeft":
+            action = "left";
+            break;
+        case "ArrowRight":
+            action = "right";
+            break;
+        case "ArrowUp":
+            action = "accelerate";
+            break;
+        case "ArrowDown":
+            action = "brake";
+            break;
+    }
+    if (action) handleAction(action);
+});
+
+// Add click event listeners to buttons
+document.getElementById('coin').addEventListener('click', function() { handleAction("coin"); });
+document.getElementById('left').addEventListener('click', function() { handleAction("left"); });
+document.getElementById('right').addEventListener('click', function() { handleAction("right"); });
+document.getElementById('accelerate').addEventListener('click', function() { handleAction("accelerate"); });
+document.getElementById('brake').addEventListener('click', function() { handleAction("brake"); });
