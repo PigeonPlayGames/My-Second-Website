@@ -47,33 +47,48 @@ function updateDisplay() {
 let startX, startY;
 
 function setupDragHandlers() {
-  document.addEventListener('mousedown', startDrag);
-  document.addEventListener('touchstart', startDragTouch);
+  const gameContainer = document.getElementById('gameContainer');
+  gameContainer.addEventListener('mousedown', startDrag);
+  gameContainer.addEventListener('touchstart', startDragTouch, { passive: true });
 }
 
 function startDrag(event) {
+  event.preventDefault(); // Prevent text selection
   startX = event.pageX;
   startY = event.pageY;
+  document.addEventListener('mousemove', onDrag);
   document.addEventListener('mouseup', endDrag);
 }
 
+function onDrag(event) {
+  // Optional: Implement logic here if you want to give real-time feedback as the user drags
+}
+
 function startDragTouch(event) {
-  if (event.touches.length === 1) { // Only deal with one finger
+  if (event.touches.length === 1) {
     startX = event.touches[0].pageX;
     startY = event.touches[0].pageY;
+    document.addEventListener('touchmove', onDragTouch, { passive: true });
     document.addEventListener('touchend', endDragTouch);
   }
 }
 
-function endDrag(event) {
-  handleDrag(event.pageX, event.pageY);
+function onDragTouch(event) {
+  // Similar to onDrag, for touch devices
+}
+
+function endDrag() {
+  document.removeEventListener('mousemove', onDrag);
   document.removeEventListener('mouseup', endDrag);
+  // Logic to determine direction and move tiles
 }
 
 function endDragTouch(event) {
-  if (event.changedTouches.length === 1) {
-    handleDrag(event.changedTouches[0].pageX, event.changedTouches[0].pageY);
-  }
+  document.removeEventListener('touchmove', onDragTouch);
+  document.removeEventListener('touchend', endDragTouch);
+  // Similar logic to determine direction and move tiles, using last touch position
+}
+
   document.removeEventListener('touchend', endDragTouch);
 }
 
