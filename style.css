@@ -30,6 +30,11 @@ body, html {
   margin: auto; /* Center the container on the page */
 }
 
+#gameContainer, #dinoRunContainer {
+    width: 100%; /* Ensure full width within the flex container */
+    margin-bottom: 20px; /* Add some space between the games */
+}
+
 /* Styling for individual cells */
 .cell {
   background-color: #cdc1b4;
