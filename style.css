@@ -1,28 +1,62 @@
-/* style.css */
+/* Basic reset for body margins and padding */
 body, html {
   margin: 0;
   padding: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-family: Arial, sans-serif;
-  background-color: orange;
+  background-color: #faf8ef;
 }
 
-.grid {
+/* Container for the game board */
+#gameContainer {
+  width: 500px;
+  height: 500px;
+  background-color: #bbada0;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 100px);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
 }
 
+/* Styling for individual cells */
 .cell {
-  background-color: #eee;
-  width: 100px;
-  height: 100px;
+  background-color: #cdc1b4;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  color: #776e65;
+  font-size: 35px;
   font-weight: bold;
+  border-radius: 5px;
+}
+
+/* Additional styles for different number values */
+.number-2 { background-color: #eee4da; }
+.number-4 { background-color: #ede0c8; }
+.number-8 { background-color: #f2b179; color: #f9f6f2; }
+.number-16 { background-color: #f59563; color: #f9f6f2; }
+.number-32 { background-color: #f67c5f; color: #f9f6f2; }
+.number-64 { background-color: #f65e3b; color: #f9f6f2; }
+.number-128 { background-color: #edcf72; color: #f9f6f2; }
+.number-256 { background-color: #edcc61; color: #f9f6f2; }
+.number-512 { background-color: #edc850; color: #f9f6f2; }
+.number-1024 { background-color: #edc53f; color: #f9f6f2; }
+.number-2048 { background-color: #edc22e; color: #f9f6f2; }
+
+/* Additional styling for larger numbers might be necessary */
+.number-4096, .number-8192, .number-16384 { background-color: #3c3a32; color: #f9f6f2; }
+
+/* Simple animation for cell appearance */
+@keyframes appear {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.cell:not(:empty) {
+  animation: appear 0.1s ease-in-out;
 }
