@@ -153,57 +153,98 @@ window.gameControls = {
 };
 
 // Function to handle actions based on key press or button click
+// Assuming all previous game setup code is in place...
+// Extend the handleAction function to control the game
 function handleAction(action) {
-  switch (action) {
-    case "coin":
-      window.gameControls.insertCoin();
-      break;
-    case "ArrowLeft":
-    case "left":
-      window.gameControls.turnLeft();
-      break;
-    case "ArrowRight":
-    case "right":
-      window.gameControls.turnRight();
-      break;
-    case "ArrowUp":
-    case "accelerate":
-      window.gameControls.accelerate();
-      break;
-    case "ArrowDown":
-    case "brake":
-      window.gameControls.brake();
-      break;
-    default:
-      console.log("Action not recognized.");
-      break;
-  }
-}
+    const status = document.getElementById('status');
 
-// Event listeners for keyboard controls
-document.addEventListener('keydown', function(event) {
-    let action = "";
-    switch (event.key) {
-        case "c":
-        case "C":
-            action = "coin";
+    switch (action) {
+        case "coin":
+            status.textContent = "Game started! Coin inserted.";
+            if (!inGame) {
+                // Start the game
+                startGame();
+            }
             break;
-        case "ArrowLeft":
-            action = "left";
+        case "left":
+            status.textContent = "Turning left...";
+            playerX -= 0.05; // Adjust this value as needed
+            // Move the car left
+            moveCar('left');
             break;
-        case "ArrowRight":
-            action = "right";
+        case "right":
+            status.textContent = "Turning right...";
+            playerX += 0.05; // Adjust this value as needed
+            // Move the car right
+            moveCar('right');
             break;
-        case "ArrowUp":
-            action = "accelerate";
+        case "accelerate":
+            status.textContent = "Accelerating...";
+            speed += 5; // Adjust this value as needed
+            // Increase speed
+            adjustSpeed('accelerate');
             break;
-        case "ArrowDown":
-            action = "brake";
+        case "brake":
+            status.textContent = "Braking...";
+            speed -= 5; // Adjust this value as needed
+            // Decrease speed
+            adjustSpeed('brake');
+            break;
+        default:
+            console.log("Unknown action:", action);
             break;
     }
-    if (action) handleAction(action);
+}
+
+// Define game control functions based on the new structure
+function startGame() {
+    inGame = true;
+    // Reset or set initial game state here
+    // For example, resetting score, position, speed, etc.
+    console.log("Game started");
+}
+
+function moveCar(direction) {
+    // Logic to adjust car's position on the game screen
+    // This could involve changing playerX or other relevant variables
+    console.log(`Moving car ${direction}`);
+}
+
+function adjustSpeed(action) {
+    // Logic to adjust the car's speed
+    // This could involve changing the speed variable or similar
+    console.log(`Adjusting speed: ${action}`);
+}
+
+// Setup button event listeners
+document.getElementById('coin').addEventListener('click', () => handleAction("coin"));
+document.getElementById('left').addEventListener('click', () => handleAction("left"));
+document.getElementById('right').addEventListener('click', () => handleAction("right"));
+document.getElementById('accelerate').addEventListener('click', () => handleAction("accelerate"));
+document.getElementById('brake').addEventListener('click', () => handleAction("brake"));
+
+// Example implementation for keyboard control integration
+document.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case "ArrowLeft":
+            handleAction("left");
+            break;
+        case "ArrowRight":
+            handleAction("right");
+            break;
+        case "ArrowUp":
+            handleAction("accelerate");
+            break;
+        case "ArrowDown":
+            handleAction("brake");
+            break;
+        case "c":
+            handleAction("coin");
+            break;
+    }
 });
 
+    if (action) handleAction(action);
 // Add click event listeners to buttons
 document.getElementById('coin').addEventListener('click', function() { handleAction("coin"); });
 document.getElementById('left').addEventListener('click', function() { handleAction("left"); });
