@@ -32,6 +32,7 @@ function Snake() {
     this.update = function() {
         for (let i = 0; i < this.tail.length - 1; i++) {
             this.tail[i] = this.tail[i + 1];
+            
         }
         if (this.total >= 1) {
             this.tail[this.total - 1] = { x: this.x, y: this.y };
@@ -46,8 +47,6 @@ function Snake() {
     };
 
     // Rest of the Snake function...
-}
-
 
     this.changeDirection = function(direction) {
         switch(direction) {
