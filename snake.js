@@ -18,8 +18,8 @@ function Snake() {
     this.y = 0;
     this.xSpeed = scale * 1;
     this.ySpeed = 0;
-    this.total = 0;
-    this.tail = [];
+    this.total = 2; // Set initial length of the snake
+    this.tail = [{x: this.x, y: this.y}, {x: this.x - scale, y: this.y}]; // Initialize with two segments
 
     this.draw = function() {
         ctx.fillStyle = "#FFFFFF";
@@ -44,6 +44,10 @@ function Snake() {
         this.x = this.x >= canvas.width ? 0 : this.x < 0 ? canvas.width - scale : this.x;
         this.y = this.y >= canvas.height ? 0 : this.y < 0 ? canvas.height - scale : this.y;
     };
+
+    // Rest of the Snake function...
+}
+
 
     this.changeDirection = function(direction) {
         switch(direction) {
