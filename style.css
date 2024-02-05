@@ -90,6 +90,27 @@ body {
     transform: scale(1.05);
 }
 
+#gameArea {
+    width: 400px;
+    height: 400px;
+    background-color: #000;
+    position: relative;
+}
+
+.snake {
+    width: 20px;
+    height: 20px;
+    background-color: #00ff00;
+    position: absolute;
+}
+
+.food {
+    width: 20px;
+    height: 20px;
+    background-color: #ff0000;
+    position: absolute;
+}
+
 @keyframes jump {
     0%, 100% { bottom: 0; }
     50% { bottom: 100px; }
