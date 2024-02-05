@@ -1,137 +1,172 @@
-const gameArea = document.getElementById('gameArea');
-const context = gameArea.getContext('2d');
-const gameWidth = gameArea.width;
-const gameHeight = gameArea.height;
-const snakeSize = 10; // Size of the snake block
-let snake = [{ x: 150, y: 150 }]; // Initial snake position
-let food = { x: 0, y: 0 }; // Initial food position
-let dx = snakeSize; // Horizontal velocity
-let dy = 0; // Vertical velocity
-let score = 0;
-let gameSpeed = 100; // Game speed in ms
+// Get canvas element and context
+const canvas = document.getElementById('snakeGame');
+const ctx = canvas.getContext('2d');
 
-// Function to draw the snake
-function drawSnakePart(snakePart) {
-  context.fillStyle = '#00FF00'; // Snake color
-  context.fillRect(snakePart.x, snakePart.y, snakeSize, snakeSize);
+// Set canvas size and scale for the game
+canvas.width = window.innerWidth <= 600 ? window.innerWidth - 20 : 600;
+canvas.height = 400; // Fixed height for simplicity
+const scale = 10;
+const rows = canvas.height / scale;
+const columns = canvas.width / scale;
+
+let snake;
+let fruit;
+let intervalTime = 250; // Initial interval time in milliseconds
+
+function Snake() {
+    this.x = 0;
+    this.y = 0;
+    this.xSpeed = scale * 1;
+    this.ySpeed = 0;
+    this.total = 2; // Set initial length of the snake
+    this.tail = [{x: this.x, y: this.y}, {x: this.x - scale, y: this.y}]; // Initialize with two segments
+
+    this.draw = function() {
+        ctx.fillStyle = "#FFFFFF";
+        for (let i = 0; i < this.tail.length; i++) {
+            ctx.fillRect(this.tail[i].x, this.tail[i].y, scale, scale);
+        }
+        ctx.fillRect(this.x, this.y, scale, scale);
+    };
+
+    this.update = function() {
+        for (let i = 0; i < this.tail.length - 1; i++) {
+            this.tail[i] = this.tail[i + 1];
+            
+        }
+        if (this.total >= 1) {
+            this.tail[this.total - 1] = { x: this.x, y: this.y };
+        }
+
+        this.x += this.xSpeed;
+        this.y += this.ySpeed;
+
+        // Wrap snake position on edge of screen
+        this.x = this.x >= canvas.width ? 0 : this.x < 0 ? canvas.width - scale : this.x;
+        this.y = this.y >= canvas.height ? 0 : this.y < 0 ? canvas.height - scale : this.y;
+    };
+
+    // Rest of the Snake function...
+
+    this.changeDirection = function(direction) {
+        switch(direction) {
+            case 'Up':
+                if (this.ySpeed === 0) {
+                    this.xSpeed = 0;
+                    this.ySpeed = -scale;
+                }
+                break;
+            case 'Down':
+                if (this.ySpeed === 0) {
+                    this.xSpeed = 0;
+                    this.ySpeed = scale;
+                }
+                break;
+            case 'Left':
+                if (this.xSpeed === 0) {
+                    this.xSpeed = -scale;
+                    this.ySpeed = 0;
+                }
+                break;
+            case 'Right':
+                if (this.xSpeed === 0) {
+                    this.xSpeed = scale;
+                    this.ySpeed = 0;
+                }
+                break;
+        }
+    };
+
+    this.eat = function(fruit) {
+        if (this.x === fruit.x && this.y === fruit.y) {
+            this.total++;
+            return true;
+        }
+        return false;
+    };
+
+    this.checkCollision = function() {
+        for (let i = 0; i < this.tail.length; i++) {
+            if (this.x === this.tail[i].x && this.y === this.tail[i].y) {
+                this.total = 0;
+                this.tail = [];
+                break;
+            }
+        }
+    };
 }
 
-// Function to draw the snake
-function drawSnake() {
-  snake.forEach(drawSnakePart);
+function Fruit() {
+    this.x;
+    this.y;
+
+    this.pickLocation = function() {
+        this.x = (Math.floor(Math.random() * columns)) * scale;
+        this.y = (Math.floor(Math.random() * rows)) * scale;
+    };
+
+    this.draw = function() {
+        ctx.fillStyle = "#4CAF50";
+        ctx.fillRect(this.x, this.y, scale, scale);
+    };
 }
 
-// Function to move the snake
-function moveSnake() {
-  const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-  snake.unshift(head);
+function setup() {
+    snake = new Snake();
+    fruit = new Fruit();
+    fruit.pickLocation();
 
-  // Check if the snake has eaten food
-  if (head.x === food.x && head.y === food.y) {
-    score += 10;
-    generateFood();
-  } else {
-    snake.pop();
-  }
+    window.setInterval(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        fruit.draw();
+        snake.update();
+        snake.draw();
 
-  // Check for collision with walls
-  if (head.x < 0 || head.x >= gameWidth || head.y < 0 || head.y >= gameHeight || checkSnakeCollision(head)) {
-    gameArea.innerHTML = 'Game Over! Refresh to play again.';
-    clearInterval(gameInterval);
-  }
+        if (snake.eat(fruit)) {
+            fruit.pickLocation();
+        }
+
+        snake.checkCollision();
+        document.querySelector('title').textContent = `Snake Game - Score: ${snake.total}`;
+    }, intervalTime);
 }
 
-// Function to check if the snake has collided with itself
-function checkSnakeCollision(head) {
-  for (let i = 4; i < snake.length; i++) {
-    if (head.x === snake[i].x && head.y === snake[i].y) {
-      return true;
-    }
-  }
-  return false;
-}
+// Touch controls setup
+var initialX = null;
+var initialY = null;
 
-// Function to generate food
-function generateFood() {
-  food.x = Math.floor(Math.random() * (gameWidth / snakeSize)) * snakeSize;
-  food.y = Math.floor(Math.random() * (gameHeight / snakeSize)) * snakeSize;
-  if (snake.some(part => part.x === food.x && part.y === food.y)) {
-    generateFood(); // Regenerate if food spawns on the snake
-  }
-}
-
-// Function to draw the food
-function drawFood() {
-  context.fillStyle = '#FF0000'; // Food color
-  context.fillRect(food.x, food.y, snakeSize, snakeSize);
-}
-
-// Change direction based on keyboard input
-function changeDirection(event) {
-  const LEFT_KEY = 37;
-  const RIGHT_KEY = 39;
-  const UP_KEY = 38;
-  const DOWN_KEY = 40;
-
-  const keyPressed = event.keyCode;
-  const goingUp = dy === -snakeSize;
-  const goingDown = dy === snakeSize;
-  const goingRight = dx === snakeSize;
-  const goingLeft = dx === -snakeSize;
-
-  if (keyPressed === LEFT_KEY && !goingRight) { dx = -snakeSize; dy = 0; }
-  if (keyPressed === UP_KEY && !goingDown) { dx = 0; dy = -snakeSize; }
-  if (keyPressed === RIGHT_KEY && !goingLeft) { dx = snakeSize; dy = 0; }
-  if (keyPressed === DOWN_KEY && !goingUp) { dx = 0; dy = snakeSize; }
-}
-
-// Touch controls
-let touchStartX = 0;
-let touchStartY = 0;
-
-gameArea.addEventListener('touchstart', (e) => {
-  touchStartX = e.touches[0].clientX;
-  touchStartY = e.touches[0].clientY;
+canvas.addEventListener('touchstart', (e) => {
+    initialX = e.touches[0].clientX;
+    initialY = e.touches[0].clientY;
 }, false);
 
-gameArea.addEventListener('touchmove', (e) => {
-  if (!touchStartX || !touchStartY) return;
+canvas.addEventListener('touchmove', (e) => {
+    if (!initialX || !initialY) {
+        return;
+    }
 
-  let xDiff = touchStartX - e.touches[0].clientX;
-  let yDiff = touchStartY - e.touches[0].clientY;
+    var currentX = e.touches[0].clientX;
+    var currentY = e.touches[0].clientY;
 
-  if (Math.abs(xDiff) > Math.abs(yDiff)) { // Most significant.
-    if (xDiff > 0) {
-      // left swipe
-      if (dx === 0) { dx = -snakeSize; dy = 0; }
+    var diffX = initialX - currentX;
+    var diffY = initialY - currentY;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal movement
+        snake.changeDirection(diffX > 0 ? 'Left' : 'Right');
     } else {
-      // right swipe
-      if (dx === 0) { dx = snakeSize; dy = 0; }
+        // Vertical movement
+        snake.changeDirection(diffY > 0 ? 'Up' : 'Down');
     }
-  } else {
-    if (yDiff > 0) {
-      // up swipe
-      if (dy === 0) { dx = 0; dy = -snakeSize; }
-    } else { 
-      // down swipe
-      if (dy === 0) { dx = 0; dy = snakeSize; }
-    }
-  }
 
-  // Prevent scrolling when touching the canvas
-  e.preventDefault();
+    e.preventDefault();
+    initialX = null;
+    initialY = null;
 }, false);
 
-document.addEventListener('keydown', changeDirection);
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth <= 600 ? window.innerWidth - 20 : 600;
+    setup(); // Re-initialize the game to apply the new canvas size
+});
 
-// Main game loop
-function main() {
-  context.clearRect(0, 0, gameArea.width, gameArea.height);
-  drawSnake();
-  moveSnake();
-  drawFood();
-}
-
-// Start the game
-generateFood();
-let gameInterval = setInterval(main, gameSpeed);
+setup();
