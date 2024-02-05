@@ -2,33 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>More Games</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PigeonPlayGames - More Games</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 </head>
 <body>
-    <div class="games-container">
-        <div class="game" data-url="game1.html">
-            <img src="game1.jpg" alt="Game 1">
-            <h2>Game 1 Title</h2>
-            <p>Description of Game 1. This is a brief summary of what the game is about.</p>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>PigeonPlayGames</strong></li>
+        </ul>
+        <ul>
+            <li><a href="index.html" role="button">Home</a></li>
+            <li><a href="games2.html" role="button">Games</a></li>
+            <li><a href="community3.html" role="button">Community</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <div class="grid">
+            <section>
+                <h1>More Games</h1>
+                <!-- Example Game Entry -->
+                <div class="game-entry">
+                    <h2>Classic Snake</h2>
+                    <img src="https://source.unsplash.com/random/400x300/?game" alt="Game 1">
+                    <p>Nothing Fancy just some old schcool snake.</p>
+                    <a href="game1.html">Play Snake</a>
+                </div>
+                <div class="game-entry">
+                    <h2>Tetris</h2>
+                    <img src="https://source.unsplash.com/random/400x300/?game" alt="Game 1">
+                    <p> Got time for Tetris?</p>
+                    <a href="game2.html">Play Tetris</a>
+                </div>
+                <div class="game-entry">
+                    <h2>Mr Bexhill 2D 1</h2>
+                    <img src="https://source.unsplash.com/random/400x300/?game" alt="Game 1">
+                    <p> Just like Mr Bexhill 3D ... but not as good</p>
+                    <a href="game3.html">Comming soon ( Feb 2024)</a>
+                </div>
+                <div class="game-entry">
+                    <h2>Project Mr Bexhill 3D</h2>
+                    <img src="https://source.unsplash.com/random/400x300/?game" alt="Game 1">
+                    <p>Discover the adventures of Mr Bexhill. challenge yourself with puzzles and strategies.</p>
+                    <a href="game4.html">Comming soon< ( April 2024)/a>
+                </div>
+                <!-- Repeat for other games -->
+            </section>
         </div>
-        <div class="game" data-url="game2.html">
-            <img src="game2.jpg" alt="Game 2">
-            <h2>Game 2 Title</h2>
-            <p>Description of Game 2. This is a brief summary of what the game is about.</p>
-        </div>
-        <div class="game" data-url="game3.html">
-            <img src="game3.jpg" alt="Game 3">
-            <h2>Game 3 Title</h2>
-            <p>Description of Game 3. This is a brief summary of what the game is about.</p>
-        </div>
-        <div class="game" data-url="game4.html">
-            <img src="game4.jpg" alt="Game 4">
-            <h2>Game 4 Title</h2>
-            <p>Description of Game 4. This is a brief summary of what the game is about.</p>
-        </div>
-    </div>
-    <script src="script.js"></script>
+    </main>
+    <footer class="container">
+        <small>
+            <a href="#">Privacy Policy</a> • <a href="#">Terms of Use</a>
+        </small>
+    </footer>
 </body>
 </html>
