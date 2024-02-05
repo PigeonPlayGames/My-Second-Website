@@ -38,15 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
         context.strokeRect(x * sq, y * sq, sq, sq);
     }
 
+    const Z = [
+    [1, 1, 0],
+    [0, 1, 1],
+    [0, 0, 0]
+];
+
+
     // Tetromino shapes
     const PIECES = [
         [Z, 'red'],
-        [S, 'green'],
-        [T, 'purple'],
-        [O, 'yellow'],
-        [L, 'orange'],
-        [I, 'cyan'],
-        [J, 'blue']
     ];
 
     // The Object Piece Constructor
@@ -231,9 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Generate random pieces
     function randomPiece() {
-        let randomN = Math.floor(Math.random() * PIECES.length) // 0 -> 6
-        return new Piece(PIECES[randomN][0], PIECES[randomN][1]);
-    }
+    let r = Math.floor(Math.random() * PIECES.length);
+    return new Piece(PIECES[r][0], PIECES[r][1]);
+}
+
 
     // Drop the piece every 1sec
     function drop() {
