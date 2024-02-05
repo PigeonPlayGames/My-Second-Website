@@ -255,4 +255,3 @@ document.addEventListener('DOMContentLoaded', () => {
     drop();
     currentPiece.draw(); // Make sure this is called to draw the initial piece
 });
-
