@@ -253,4 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
     currentPiece = randomPiece();
     drawBoard();
     drop();
+    currentPiece.draw(); // Make sure this is called to draw the initial piece
 });
+
