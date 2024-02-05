@@ -235,6 +235,7 @@
         <button id="right">Right</button>
         <button id="accelerate">Accelerate</button>
         <button id="brake">Brake</button>
+        <button id="more-games">More Games</button>
     </div>
 
     <script>
@@ -343,7 +344,10 @@
         document.getElementById('right').addEventListener('click', function() { handleAction("ArrowRight"); });
         document.getElementById('accelerate').addEventListener('click', function() { handleAction("ArrowUp"); });
         document.getElementById('brake').addEventListener('click', function() { handleAction("ArrowDown"); });
-
+         // New script to handle the More Games button click
+        document.getElementById('more-games').addEventListener('click', function() {
+            window.location.href = 'https://pigeonplaygames.online/moregames.html';
+        });
         function handleAction(key) {
             const status = document.getElementById('status');
 
