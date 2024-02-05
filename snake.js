@@ -27,21 +27,20 @@
                 const head = { x: snake[0].x + dx, y: snake[0].y + dy };
                 snake.unshift(head);
 
-    // Check if the snake has eaten food
+                // Check if the snake has eaten food
                 if (head.x === food.x && head.y === food.y) {
                     score += 10; // Increment score
                     updateScore(); // Update the score display
                     generateFood(); // Generate new food
-        // Increase speed as the snake eats more food
-                if (gameSpeed > 30) {
-                    gameSpeed -= 5;
-                    clearInterval(gameInterval);
-                    gameInterval = setInterval(main, gameSpeed);
-                }
+                    // Optionally increase speed as the snake eats more food
+                    if (gameSpeed > 30) {
+                        gameSpeed -= 5;
+                        clearInterval(gameInterval);
+                        gameInterval = setInterval(main, gameSpeed);
+                    }
                 } else {
                     snake.pop();
                 }
-                
 
                 if (head.x < 0 || head.x >= gameWidth || head.y < 0 || head.y >= gameHeight || checkSnakeCollision(head)) {
                     clearInterval(gameInterval);
@@ -105,8 +104,8 @@
                 dx = 10; // Reset movement direction
                 dy = 0;
                 score = 0; // Reset score
+                updateScore(); // Make sure to update the score display
                 gameSpeed = 100; // Reset game speed
-                updateScore();
                 generateFood();
                 clearInterval(gameInterval);
                 gameInterval = setInterval(main, gameSpeed);
