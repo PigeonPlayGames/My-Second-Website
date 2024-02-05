@@ -8,29 +8,34 @@ const rows = canvas.height / scale;
 const columns = canvas.width / scale;
 
 let snake;
+let intervalTime = 250; // Initial interval time in milliseconds
 
 (function setup() {
-    canvas.width = window.innerWidth <= 600 ? window.innerWidth - 20 : 600; // Responsive canvas width
-    canvas.height = 400; // Fixed height for simplicity
 
-    snake = new Snake();
-    fruit = new Fruit();
-    fruit.pickLocation();
-
-    window.setInterval(() => {
+    function gameLoop() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         fruit.draw();
         snake.update();
         snake.draw();
-
+        
         if (snake.eat(fruit)) {
             fruit.pickLocation();
+            // Decrease interval time to increase speed every time the snake eats a fruit
+            intervalTime = 250 - Math.min(90, snake.total * 5);
         }
 
         snake.checkCollision();
-        document.querySelector('title').textContent = `Snake Game - Score: ${snake.total}`;
-    }, 250);
+        let highScore = parseInt(localStorage.getItem('highScore')) || 0;
+        if (snake.total > highScore) {
+            localStorage.setItem('highScore', snake.total);
+        }
+        document.querySelector('title').textContent = `Snake Game - Score: ${snake.total} - High Score: ${highScore}`;
+
+        setTimeout(gameLoop, intervalTime);
+    }
+    gameLoop();
 }());
+    
 
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth <= 600 ? window.innerWidth - 20 : 600;
@@ -112,12 +117,12 @@ function Snake() {
     };
 
     this.eat = function(fruit) {
-        if (this.x === fruit.x && this.y === fruit.y) {
-            this.total++;
-            return true;
-        }
-
-        return false;
+    if (this.x === fruit.x && this.y === fruit.y) {
+        this.total++;
+        // Add any visual feedback here. Example: Flash the canvas border or change snake color briefly
+        return true;
+    }
+    return false;
     };
 
     this.checkCollision = function() {
@@ -198,3 +203,4 @@ function moveTouch(e) {
     initialX = null;
     initialY = null;
 };
+
