@@ -21,14 +21,17 @@ canvas.addEventListener('touchstart', handleTouchStart, false);
 canvas.addEventListener('touchmove', handleTouchMove, false);
 
 function main() {
-    if (didGameEnd()) return;
+    if (didGameEnd()) {
+        alert('Game over. Press OK to restart.');
+        document.location.reload();
+        return;
+    }
 
     setTimeout(function onTick() {
         clearCanvas();
         drawFood();
         advanceSnake();
         drawSnake();
-        // Call main again
         main();
     }, 100);
 }
@@ -53,8 +56,7 @@ function advanceSnake() {
     const head = {x: snake[0].x + dx, y: snake[0].y + dy};
     snake.unshift(head);
 
-    const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
-    if (didEatFood) {
+    if (snake[0].x === foodX && snake[0].y === foodY) {
         score += 10;
         document.getElementById('score').innerHTML = `Score: ${score}`;
         createFood();
@@ -96,7 +98,7 @@ function handleTouchStart(event) {
 }
 
 function handleTouchMove(event) {
-    event.preventDefault(); // Prevent scrolling
+    event.preventDefault();
     touchEndX = event.touches[0].clientX;
     touchEndY = event.touches[0].clientY;
     handleSwipeGesture();
@@ -107,29 +109,28 @@ function handleSwipeGesture() {
     const dy = touchEndY - touchStartY;
     if (Math.abs(dx) > Math.abs(dy)) {
         if (dx > 0) {
-            changeDirection({ keyCode: 39 }); // Swipe right
+            changeDirection({ keyCode: 39 });
         } else {
-            changeDirection({ keyCode: 37 }); // Swipe left
+            changeDirection({ keyCode: 37 });
         }
     } else {
         if (dy > 0) {
-            changeDirection({ keyCode: 40 }); // Swipe down
+            changeDirection({ keyCode: 40 });
         } else {
-            changeDirection({ keyCode: 38 }); // Swipe up
+            changeDirection({ keyCode: 38 });
         }
     }
 }
 
 function randomTen(min, max) {
-    return Math.round((Math.random() * (max-min) + min) / 10) * 10;
+    return Math.round((Math.random() * (max - min) + min) / 10) * 10;
 }
 
 function createFood() {
     foodX = randomTen(0, canvas.width - 10);
     foodY = randomTen(0, canvas.height - 10);
-    snake.forEach(function isFoodOnSnake(part) {
-        const foodIsOnSnake = part.x === foodX && part.y === foodY;
-        if (foodIsOnSnake) createFood();
+    snake.forEach(part => {
+        if (part.x == foodX && part.y == foodY) createFood();
     });
 }
 
@@ -140,8 +141,7 @@ function drawFood() {
 
 function didGameEnd() {
     for (let i = 4; i < snake.length; i++) {
-        const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
-        if (didCollide) return true;
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
     }
 
     const hitLeftWall = snake[0].x < 0;
@@ -152,5 +152,5 @@ function didGameEnd() {
     return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall;
 }
 
-createFood();
-main();
+createFood(); // Place the first food
+main(); // Start the game loop
