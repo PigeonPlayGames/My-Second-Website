@@ -1,216 +1,200 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    * {
+      font-family: 'Press Start 2P', cursive;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: black;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #ddd;
+    }
   </style>
 </head>
-<body>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link</p>
-<p class="p1"><span class="Apple-converted-space">    </span>href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap"</p>
-<p class="p1"><span class="Apple-converted-space">    </span>rel="stylesheet"</p>
-<p class="p1"><span class="Apple-converted-space">  </span>/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>* {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: 'Press Start 2P', cursive;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: black;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>h1 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>button {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>button:hover {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #ddd;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div style="display: inline-block; position: relative"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">    </span>id="overlappingDiv"</p>
-<p class="p1"><span class="Apple-converted-space">    </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: black;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>right: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>z-index: 10;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>"</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;canvas&gt;&lt;/canvas&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">    </span>id="characterDialogueBox"</p>
-<p class="p1"><span class="Apple-converted-space">    </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: white;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 140px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>right: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-top: 4px black solid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>"</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="userInterface" style="display: none"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Represents health bar of draggle (enemy) --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">      </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">        </span>background-color: white;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>width: 250px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>top: 50px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>left: 50px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>border: 4px black solid;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>"</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h1 style="font-size: 16px"&gt;Draggle&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="position: relative"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">          </span>style="height: 5px; background-color: #ccc; margin-top: 10px"</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">          </span>id="enemyHealthBar"</p>
-<p class="p1"><span class="Apple-converted-space">          </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 5px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: green;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>right: 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>"</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Represents health bar of emby (us) --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">      </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">        </span>background-color: white;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>width: 250px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>top: 330px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>right: 50px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>border: 4px black solid;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>"</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h1 style="font-size: 16px"&gt;Emby&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="position: relative"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">          </span>style="height: 5px; background-color: #ccc; margin-top: 10px"</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">          </span>id="playerHealthBar"</p>
-<p class="p1"><span class="Apple-converted-space">          </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 5px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: green;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>right: 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>"</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">      </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">        </span>background-color: white;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>height: 140px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>right: 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>border-top: 4px black solid;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>"</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">        </span>id="dialogueBox"</p>
-<p class="p1"><span class="Apple-converted-space">        </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">          </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>right: 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>background-color: white;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>display: none;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>"</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>sdkfjlsdajl</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">        </span>id="attacksBox"</p>
-<p class="p1"><span class="Apple-converted-space">        </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">          </span>width: 66.66%;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>grid-template-columns: repeat(2, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>"</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div</p>
-<p class="p1"><span class="Apple-converted-space">        </span>style="</p>
-<p class="p1"><span class="Apple-converted-space">          </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>width: 33.33%;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>border-left: 4px black solid;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>"</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1 id="attackType" style="font-size: 16px"&gt;Attack Type&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;script</p>
-<p class="p1"><span class="Apple-converted-space">  </span>src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"</p>
-<p class="p1"><span class="Apple-converted-space">  </span>integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="</p>
-<p class="p1"><span class="Apple-converted-space">  </span>crossorigin="anonymous"</p>
-<p class="p1"><span class="Apple-converted-space">  </span>referrerpolicy="no-referrer"</p>
-<p class="p1">&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script</p>
-<p class="p1"><span class="Apple-converted-space">  </span>src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"</p>
-<p class="p1"><span class="Apple-converted-space">  </span>integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="</p>
-<p class="p1"><span class="Apple-converted-space">  </span>crossorigin="anonymous"</p>
-<p class="p1"><span class="Apple-converted-space">  </span>referrerpolicy="no-referrer"</p>
-<p class="p1">&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="data/audio.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="data/battleZones.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="data/collisions.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="data/attacks.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="data/monsters.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="data/characters.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="js/utils.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="classes.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="index.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;script src="battleScene.js"&gt;&lt;/script&gt;</p>
-</body>
-</html>
+
+<div style="display: inline-block; position: relative">
+  <div
+    id="overlappingDiv"
+    style="
+      background-color: black;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
+    "
+  ></div>
+
+  <canvas></canvas>
+  <div
+    id="characterDialogueBox"
+    style="
+      background-color: white;
+      height: 140px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 4px black solid;
+      display: none;
+      padding: 12px;
+    "
+  ></div>
+
+  <div id="userInterface" style="display: none">
+    <!-- Represents health bar of draggle (enemy) -->
+    <div
+      style="
+        background-color: white;
+        width: 250px;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        border: 4px black solid;
+        padding: 12px;
+      "
+    >
+      <h1 style="font-size: 16px">Draggle</h1>
+      <div style="position: relative">
+        <div
+          style="height: 5px; background-color: #ccc; margin-top: 10px"
+        ></div>
+        <div
+          id="enemyHealthBar"
+          style="
+            height: 5px;
+            background-color: green;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+          "
+        ></div>
+      </div>
+    </div>
+
+    <!-- Represents health bar of emby (us) -->
+    <div
+      style="
+        background-color: white;
+        width: 250px;
+        position: absolute;
+        top: 330px;
+        right: 50px;
+        border: 4px black solid;
+        padding: 12px;
+      "
+    >
+      <h1 style="font-size: 16px">Emby</h1>
+      <div style="position: relative">
+        <div
+          style="height: 5px; background-color: #ccc; margin-top: 10px"
+        ></div>
+        <div
+          id="playerHealthBar"
+          style="
+            height: 5px;
+            background-color: green;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+          "
+        ></div>
+      </div>
+    </div>
+
+    <div
+      style="
+        background-color: white;
+        height: 140px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top: 4px black solid;
+        display: flex;
+      "
+    >
+      <div
+        id="dialogueBox"
+        style="
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-color: white;
+          padding: 12px;
+          display: none;
+          cursor: pointer;
+        "
+      >
+        sdkfjlsdajl
+      </div>
+      <div
+        id="attacksBox"
+        style="
+          width: 66.66%;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+        "
+      ></div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 33.33%;
+          border-left: 4px black solid;
+        "
+      >
+        <h1 id="attackType" style="font-size: 16px">Attack Type</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+  integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+  integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script src="audio.js"></script>
+<script src="battleZones.js"></script>
+<script src="collisions.js"></script>
+<script src="attacks.js"></script>
+<script src="monsters.js"></script>
+<script src="characters.js"></script>
+<script src="utils.js"></script>
+<script src="classes.js"></script>
+<script src="rpg.js"></script>
+<script src="battleScene.js"></script>
