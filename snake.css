@@ -7,20 +7,12 @@ body, html {
     background-color: #f0f0f0;
 }
 
+#gameArea {
+    width: 400px;
+    height: 400px;
+    position: relative;
+}
+
 canvas {
     background-color: #000;
-}
-
-.snake {
-  width: 10px;
-  height: 10px;
-  background-color: #0f0;
-  position: absolute;
-}
-
-.food {
-  width: 10px;
-  height: 10px;
-  background-color: #f00;
-  position: absolute;
 }
