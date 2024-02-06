@@ -58,10 +58,10 @@ battleZonesMap.forEach((row, i) => {
 
 const characters = []
 const villagerImg = new Image()
-villagerImg.src = './img/villager/Idle.png'
+villagerImg.src = 'Idle.png'
 
 const oldManImg = new Image()
-oldManImg.src = './img/oldMan/Idle.png'
+oldManImg.src = 'Idle.png'
 
 charactersMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
