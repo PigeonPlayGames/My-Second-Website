@@ -134,6 +134,7 @@ function createFood() {
     });
 }
 
+
 function drawFood() {
     ctx.fillStyle = 'red';
     ctx.fillRect(foodX, foodY, 10, 10);
