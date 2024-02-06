@@ -12,6 +12,14 @@ let foodX;
 let foodY;
 let score = 0;
 
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+canvas.addEventListener('touchstart', handleTouchStart, false);
+canvas.addEventListener('touchmove', handleTouchMove, false);
+
 function main() {
     if (didGameEnd()) return;
 
@@ -82,6 +90,36 @@ function changeDirection(event) {
     }
 }
 
+function handleTouchStart(event) {
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+}
+
+function handleTouchMove(event) {
+    event.preventDefault(); // Prevent scrolling
+    touchEndX = event.touches[0].clientX;
+    touchEndY = event.touches[0].clientY;
+    handleSwipeGesture();
+}
+
+function handleSwipeGesture() {
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 0) {
+            changeDirection({ keyCode: 39 }); // Swipe right
+        } else {
+            changeDirection({ keyCode: 37 }); // Swipe left
+        }
+    } else {
+        if (dy > 0) {
+            changeDirection({ keyCode: 40 }); // Swipe down
+        } else {
+            changeDirection({ keyCode: 38 }); // Swipe up
+        }
+    }
+}
+
 function randomTen(min, max) {
     return Math.round((Math.random() * (max-min) + min) / 10) * 10;
 }
@@ -89,7 +127,6 @@ function randomTen(min, max) {
 function createFood() {
     foodX = randomTen(0, canvas.width - 10);
     foodY = randomTen(0, canvas.height - 10);
-
     snake.forEach(function isFoodOnSnake(part) {
         const foodIsOnSnake = part.x === foodX && part.y === foodY;
         if (foodIsOnSnake) createFood();
