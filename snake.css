@@ -1,0 +1,26 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+canvas {
+    background-color: #000;
+}
+
+.snake {
+  width: 10px;
+  height: 10px;
+  background-color: #0f0;
+  position: absolute;
+}
+
+.food {
+  width: 10px;
+  height: 10px;
+  background-color: #f00;
+  position: absolute;
+}
